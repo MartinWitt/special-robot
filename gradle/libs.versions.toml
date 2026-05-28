@@ -1,0 +1,21 @@
+[versions]
+spoon      = "11.3.0"
+jackson    = "3.0.0"
+picocli    = "4.7.7"
+junit      = "5.14.3"
+assertj    = "3.27.7"
+spotless   = "8.5.1"
+palantir   = "2.89.0"
+shadow     = "9.4.1"
+
+[libraries]
+spoon-core       = { module = "fr.inria.gforge.spoon:spoon-core",      version.ref = "spoon"   }
+jackson-databind = { module = "tools.jackson.core:jackson-databind",    version.ref = "jackson" }
+picocli          = { module = "info.picocli:picocli",                   version.ref = "picocli" }
+picocli-codegen  = { module = "info.picocli:picocli-codegen",           version.ref = "picocli" }
+junit-jupiter    = { module = "org.junit.jupiter:junit-jupiter",        version.ref = "junit"   }
+assertj-core     = { module = "org.assertj:assertj-core",               version.ref = "assertj" }
+
+[plugins]
+spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
+shadow   = { id = "com.gradleup.shadow",   version.ref = "shadow"   }

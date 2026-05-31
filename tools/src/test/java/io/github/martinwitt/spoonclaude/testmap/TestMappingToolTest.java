@@ -90,6 +90,41 @@ class TestMappingToolTest {
         assertThat(result.coveringTests()).contains("PaymentServiceTest");
     }
 
+    @Test
+    void doesNotCountInvocationOnSameSimpleNamedClassAsCoverage() throws IOException {
+        // Production class com.example.OrderService has cancel().
+        // A test invokes cancel() on com.other.OrderService — a completely different class.
+        // Because both share the simple name "OrderService", the simple-name fallback in
+        // declaringTypeMatches must NOT fire when the FQN is available.
+        Files.createDirectories(srcDir.resolve("com/example"));
+        writeSrc("com/example/OrderService.java", """
+                package com.example;
+                public class OrderService {
+                  public void cancel() {}
+                }
+                """);
+
+        Files.createDirectories(testDir.resolve("com/other"));
+        writeTest("com/other/OrderService.java", """
+                package com.other;
+                public class OrderService {
+                  public void cancel() {}
+                }
+                """);
+        writeTest("SomeTest.java", """
+                public class SomeTest {
+                  @org.junit.jupiter.api.Test
+                  public void test() { new com.other.OrderService().cancel(); }
+                }
+                """);
+
+        var result = new TestMappingTool(srcDir.toString(), testDir.toString(), "com.example.OrderService").execute();
+
+        assertThat(result.uncoveredMethods())
+                .as("cancel() on a different class with the same simple name must not count as coverage")
+                .contains("cancel");
+    }
+
     private void writeSrc(String filename, String content) throws IOException {
         Files.writeString(srcDir.resolve(filename), content);
     }

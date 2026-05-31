@@ -95,7 +95,14 @@ public final class TestMappingTool implements SpoonTool<TestMappingResult> {
 
     private static boolean declaringTypeMatches(CtTypeReference<?> ref, String targetFqn) {
         if (ref == null) return false;
-        return ref.getQualifiedName().equals(targetFqn) || ref.getSimpleName().equals(simpleNameOf(targetFqn));
+        String refFqn = ref.getQualifiedName();
+        // When Spoon resolved the FQN (qualified name differs from simple name), use strict
+        // FQN comparison only — the simple-name fallback would produce false positives for
+        // classes that share a simple name but live in different packages.
+        if (!refFqn.equals(ref.getSimpleName())) {
+            return refFqn.equals(targetFqn);
+        }
+        return ref.getSimpleName().equals(simpleNameOf(targetFqn));
     }
 
     private static String simpleNameOf(String fqn) {

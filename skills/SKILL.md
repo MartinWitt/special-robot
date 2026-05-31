@@ -27,6 +27,8 @@ Every command exits with code 1 on error and prints `{"error": "..."}` to stderr
 | `spoon-diff-api` | `diff-api` | What changed in the public API between two source trees? |
 | `spoon-testmap` | `testmap` | Which tests cover this class? Which methods are uncovered? |
 | `spoon-spring-routes` | `routes` | Which HTTP endpoints does this project expose (Spring MVC / JAX-RS / WebFlux Functional)? |
+| `spoon-cyclomatic` | `cyclomatic` | What is the McCabe complexity of each method in this class? |
+| `spoon-annotation-usage` | `annotation` | Where is this annotation used across the source tree? |
 
 Read the matching `references/<sub-skill>.md` for invocation details, JSON schema, and interpretation guidance before running.
 
@@ -38,5 +40,7 @@ Read the matching `references/<sub-skill>.md` for invocation details, JSON schem
 - "Where is X implemented?" → `spoon-impl-finder`
 - "Which endpoints does this expose?" → `spoon-spring-routes`
 - Test coverage gaps → `spoon-testmap`
+- "Where to test/refactor first?" → `spoon-cyclomatic`
+- "Where is @Foo used?" → `spoon-annotation-usage`
 
 Do NOT fall back to grep + full-file reads after consulting these tools — the JSON output is designed to be self-sufficient for the question it answers.

@@ -1,8 +1,10 @@
 package io.github.martinwitt.spoonclaude;
 
+import io.github.martinwitt.spoonclaude.commands.AnnotationCommand;
 import io.github.martinwitt.spoonclaude.commands.ApiCommand;
 import io.github.martinwitt.spoonclaude.commands.CallGraphCommand;
 import io.github.martinwitt.spoonclaude.commands.ContextCommand;
+import io.github.martinwitt.spoonclaude.commands.CyclomaticCommand;
 import io.github.martinwitt.spoonclaude.commands.DiffCommand;
 import io.github.martinwitt.spoonclaude.commands.ImpactCommand;
 import io.github.martinwitt.spoonclaude.commands.ImplCommand;
@@ -18,9 +20,11 @@ import picocli.CommandLine.Command;
         version = "1.0.0",
         description = "Spoon-based AST analysis tools for Claude Code",
         subcommands = {
+            AnnotationCommand.class,
             ContextCommand.class,
             CallGraphCommand.class,
             ApiCommand.class,
+            CyclomaticCommand.class,
             DiffCommand.class,
             ImpactCommand.class,
             ImplCommand.class,

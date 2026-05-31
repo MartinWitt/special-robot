@@ -7,6 +7,7 @@ import io.github.martinwitt.spoonclaude.resolve.TypeResolver;
 import io.github.martinwitt.spoonclaude.signature.SignatureBuilder;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
@@ -59,7 +60,7 @@ public final class CallGraphTool implements SpoonTool<CallGraphResult> {
             CtExecutableReference<?> exec = inv.getExecutable();
             if (exec == null) continue;
             CtTypeReference<?> decl = exec.getDeclaringType();
-            String label = (decl != null ? decl.getQualifiedName() : "?") + "#" + exec.getSignature();
+            String label = resolveTypeFqn(model, decl) + "#" + exec.getSignature();
             output.add(label);
 
             if (remainingDepth > 1 && decl != null) {
@@ -86,7 +87,7 @@ public final class CallGraphTool implements SpoonTool<CallGraphResult> {
             if (parent == null) continue;
             CtType<?> parentType = parent.getDeclaringType();
             String label =
-                    (parentType != null ? parentType.getSimpleName() + "#" : "") + SignatureBuilder.compact(parent);
+                    (parentType != null ? parentType.getQualifiedName() + "#" : "") + SignatureBuilder.compact(parent);
             callers.add(label);
         }
         return callers;
@@ -106,6 +107,23 @@ public final class CallGraphTool implements SpoonTool<CallGraphResult> {
         CtType<?> decl = method.getDeclaringType();
         String typeKey = decl != null ? decl.getQualifiedName() : "?";
         return typeKey + "#" + method.getSignature();
+    }
+
+    /**
+     * Returns the fully-qualified name for a type reference, falling back to a model
+     * lookup by simple name when Spoon's no-classpath mode cannot resolve the package.
+     */
+    private static String resolveTypeFqn(CtModel model, CtTypeReference<?> ref) {
+        if (ref == null) return "?";
+        String fqn = ref.getQualifiedName();
+        if (!fqn.contains(".")) {
+            List<String> candidates = model.getAllTypes().stream()
+                    .filter(t -> t.getSimpleName().equals(ref.getSimpleName()))
+                    .map(CtType::getQualifiedName)
+                    .toList();
+            if (candidates.size() == 1) return candidates.get(0);
+        }
+        return fqn;
     }
 
     private static Optional<CtMethod<?>> findMethod(

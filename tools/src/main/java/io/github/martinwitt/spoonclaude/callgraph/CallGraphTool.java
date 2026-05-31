@@ -59,7 +59,7 @@ public final class CallGraphTool implements SpoonTool<CallGraphResult> {
             CtExecutableReference<?> exec = inv.getExecutable();
             if (exec == null) continue;
             CtTypeReference<?> decl = exec.getDeclaringType();
-            String label = (decl != null ? decl.getSimpleName() : "?") + "#" + exec.getSignature();
+            String label = (decl != null ? decl.getQualifiedName() : "?") + "#" + exec.getSignature();
             output.add(label);
 
             if (remainingDepth > 1 && decl != null) {

@@ -99,6 +99,66 @@ class CallGraphToolTest {
         assertThat(result.callers()).isEmpty();
     }
 
+    @Test
+    void calleeLabelsUseFullyQualifiedClassName() throws IOException {
+        Files.createDirectories(tempDir.resolve("com/example"));
+        writeSource("com/example/Logger.java", """
+                package com.example;
+                public class Logger {
+                  public void log(String msg) {}
+                }
+                """);
+        writeSource("Service.java", """
+                public class Service {
+                  public void doWork() { new com.example.Logger().log("hi"); }
+                }
+                """);
+
+        var result = new CallGraphTool(tempDir.toString(), "Service", "doWork", 1).execute();
+
+        assertThat(result.callees())
+                .as("callee label must use FQN class name, not simple name")
+                .anyMatch(c -> c.startsWith("com.example.Logger#"));
+    }
+
+    @Test
+    void expandsBothOverloadedCalleePathsAtDepth3() throws IOException {
+        // Two overloads of Util#process, each leading to a distinct DB method.
+        // The visited-set key must include parameter types so that process(String)
+        // and process(int) are treated as independent paths. And findMethod must
+        // resolve String-parameterized methods despite no-classpath FQN mismatch.
+        writeSource("DB.java", """
+                public class DB {
+                  public String queryByName(String s) { return s; }
+                  public String queryById(int id) { return String.valueOf(id); }
+                }
+                """);
+        writeSource("Util.java", """
+                public class Util {
+                  public String process(String s) { return new DB().queryByName(s); }
+                  public String process(int id) { return new DB().queryById(id); }
+                }
+                """);
+        writeSource("Client.java", """
+                public class Client {
+                  private Util util;
+                  public void run() {
+                    util.process("hello");
+                    util.process(42);
+                  }
+                }
+                """);
+
+        var result = new CallGraphTool(tempDir.toString(), "Client", "run", 3).execute();
+
+        assertThat(result.callees())
+                .as("String-overload callee path must be expanded")
+                .anyMatch(c -> c.contains("queryByName"));
+        assertThat(result.callees())
+                .as("int-overload callee path must be expanded")
+                .anyMatch(c -> c.contains("queryById"));
+    }
+
     private void writeSource(String filename, String content) throws IOException {
         Files.writeString(tempDir.resolve(filename), content);
     }

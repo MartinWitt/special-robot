@@ -2,8 +2,8 @@ name: Release
 
 on:
   push:
-    tags:
-      - "v*"
+    branches:
+      - master
 
 permissions:
   contents: write
@@ -27,8 +27,15 @@ jobs:
       - name: Build skill package
         run: ./gradlew :tools:packageSkill
 
+      - name: Update latest tag
+        run: |
+          git tag -f latest
+          git push origin latest --force
+
       - name: Create GitHub Release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         with:
+          tag_name: latest
+          name: Latest
           files: tools/build/skill/spoon-claude-skill.zip
-          generate_release_notes: true
+          make_latest: true

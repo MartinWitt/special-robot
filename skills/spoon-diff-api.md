@@ -12,7 +12,7 @@ description: Diff the public/protected API between two Java source trees — add
 ## How to run
 
 ```bash
-java -jar /PATH/TO/spoon-claude.jar diff \
+java -jar ~/.claude/skills/spoon-claude/scripts/spoon-claude.jar diff \
   --before <previous-source-directory> \
   --after  <new-source-directory>
 ```
@@ -22,7 +22,7 @@ Both arguments are source directories — for a git-ref diff, check out the two 
 **Example:**
 ```bash
 git worktree add /tmp/before main
-java -jar ~/tools/spoon-claude.jar diff \
+java -jar ~/.claude/skills/spoon-claude/scripts/spoon-claude.jar diff \
   --before /tmp/before/src/main/java \
   --after  ./src/main/java
 ```

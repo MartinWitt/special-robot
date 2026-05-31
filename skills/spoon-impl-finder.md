@@ -12,7 +12,7 @@ description: Find every concrete implementation of a Java interface or abstract 
 ## How to run
 
 ```bash
-java -jar /PATH/TO/spoon-claude.jar impl \
+java -jar ~/.claude/skills/spoon-claude/scripts/spoon-claude.jar impl \
   --src <source-directory> \
   --type <ClassName | com.example.ClassName>
 ```
@@ -21,7 +21,7 @@ java -jar /PATH/TO/spoon-claude.jar impl \
 
 **Example:**
 ```bash
-java -jar ~/tools/spoon-claude.jar impl \
+java -jar ~/.claude/skills/spoon-claude/scripts/spoon-claude.jar impl \
   --src src/main/java \
   --type com.example.PaymentGateway
 ```

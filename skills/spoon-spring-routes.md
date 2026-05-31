@@ -12,13 +12,13 @@ description: List every HTTP endpoint in a Java project — Spring MVC (@RestCon
 ## How to run
 
 ```bash
-java -jar /PATH/TO/spoon-claude.jar routes \
+java -jar ~/.claude/skills/spoon-claude/scripts/spoon-claude.jar routes \
   --src <source-directory>
 ```
 
 **Example:**
 ```bash
-java -jar ~/tools/spoon-claude.jar routes \
+java -jar ~/.claude/skills/spoon-claude/scripts/spoon-claude.jar routes \
   --src src/main/java
 ```
 

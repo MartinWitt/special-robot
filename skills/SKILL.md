@@ -10,7 +10,7 @@ Pick the matching sub-skill when you need a precise, AST-level answer that grep 
 The bundle ships `scripts/spoon-claude.jar`. Resolve its path relative to this skill folder and invoke commands as:
 
 ```bash
-java -jar /PATH/TO/SKILL/scripts/spoon-claude.jar <command> --src <source-directory> [options]
+java -jar ~/.claude/skills/spoon-claude/scripts/spoon-claude.jar <command> [options]
 ```
 
 Every command exits with code 1 on error and prints `{"error": "..."}` to stderr.

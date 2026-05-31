@@ -12,7 +12,7 @@ description: Find which tests cover a Java class and which public methods have n
 ## How to run
 
 ```bash
-java -jar /PATH/TO/spoon-claude.jar testmap \
+java -jar ~/.claude/skills/spoon-claude/scripts/spoon-claude.jar testmap \
   --src <production-source-directory> \
   --test-src <test-source-directory> \
   --class <ClassName | com.example.ClassName>
@@ -22,7 +22,7 @@ java -jar /PATH/TO/spoon-claude.jar testmap \
 
 **Example:**
 ```bash
-java -jar ~/tools/spoon-claude.jar testmap \
+java -jar ~/.claude/skills/spoon-claude/scripts/spoon-claude.jar testmap \
   --src src/main/java \
   --test-src src/test/java \
   --class com.example.OrderService

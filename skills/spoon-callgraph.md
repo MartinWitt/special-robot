@@ -11,7 +11,7 @@ description: Show who calls a Java method and what it calls, up to N levels deep
 ## How to run
 
 ```bash
-java -jar /PATH/TO/spoon-claude.jar callgraph \
+java -jar ~/.claude/skills/spoon-claude/scripts/spoon-claude.jar callgraph \
   --file <path-to-file-or-directory> \
   --method <ClassName#methodName[(Type1,Type2)]> \
   [--depth <1|2|3>]
@@ -21,7 +21,7 @@ Class names accept simple or fully-qualified form. For overloaded methods, appen
 
 **Example:**
 ```bash
-java -jar ~/tools/spoon-claude.jar callgraph \
+java -jar ~/.claude/skills/spoon-claude/scripts/spoon-claude.jar callgraph \
   --file src/main/java \
   --method com.example.OrderService#placeOrder(Cart) \
   --depth 2

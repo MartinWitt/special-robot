@@ -12,7 +12,7 @@ description: Answer "what breaks if I change X?" — finds all callers of a meth
 ## How to run
 
 ```bash
-java -jar /PATH/TO/spoon-claude.jar impact \
+java -jar ~/.claude/skills/spoon-claude/scripts/spoon-claude.jar impact \
   --src <source-directory> \
   --element <ClassName | ClassName#methodName[(Type1,Type2)]>
 ```
@@ -22,12 +22,12 @@ java -jar /PATH/TO/spoon-claude.jar impact \
 **Examples:**
 ```bash
 # Impact of changing one overload of a method
-java -jar ~/tools/spoon-claude.jar impact \
+java -jar ~/.claude/skills/spoon-claude/scripts/spoon-claude.jar impact \
   --src src/main/java \
   --element com.example.UserRepository#findById(Long)
 
 # Impact of changing a type
-java -jar ~/tools/spoon-claude.jar impact \
+java -jar ~/.claude/skills/spoon-claude/scripts/spoon-claude.jar impact \
   --src src/main/java \
   --element com.example.UserDto
 ```

@@ -11,7 +11,7 @@ description: Dump the public/protected API surface of a Java class — construct
 ## How to run
 
 ```bash
-java -jar /PATH/TO/spoon-claude.jar api \
+java -jar ~/.claude/skills/spoon-claude/scripts/spoon-claude.jar api \
   --file <path-to-file-or-directory> \
   --class <ClassName | com.example.ClassName>
 ```
@@ -20,7 +20,7 @@ java -jar /PATH/TO/spoon-claude.jar api \
 
 **Example:**
 ```bash
-java -jar ~/tools/spoon-claude.jar api \
+java -jar ~/.claude/skills/spoon-claude/scripts/spoon-claude.jar api \
   --file src/main/java \
   --class com.example.UserRepository
 ```

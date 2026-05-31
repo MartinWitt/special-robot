@@ -10,7 +10,7 @@ Use this instead of `Read` when you only need one method.
 ## How to run
 
 ```bash
-java -jar /PATH/TO/spoon-claude.jar context \
+java -jar ~/.claude/skills/spoon-claude/scripts/spoon-claude.jar context \
   --file <path-to-file-or-directory> \
   --element <ClassName#methodName>
 ```
@@ -21,12 +21,12 @@ If the class name or the method is ambiguous, the tool fails with a message list
 
 **Examples:**
 ```bash
-java -jar ~/tools/spoon-claude.jar context \
+java -jar ~/.claude/skills/spoon-claude/scripts/spoon-claude.jar context \
   --file src/main/java/com/example/UserService.java \
   --element UserService#findById
 
 # disambiguate an overload
-java -jar ~/tools/spoon-claude.jar context \
+java -jar ~/.claude/skills/spoon-claude/scripts/spoon-claude.jar context \
   --file src/main/java \
   --element com.example.UserService#findById(Long)
 ```

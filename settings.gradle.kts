@@ -12,4 +12,4 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "spoon-claude-tools"
-include("tools", "app")
+include("tools")

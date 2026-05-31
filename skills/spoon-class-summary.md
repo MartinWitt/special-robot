@@ -13,7 +13,7 @@ This skill is a superset of `spoon-api` plus class-level metadata and dependency
 ## How to run
 
 ```bash
-java -jar /PATH/TO/spoon-claude.jar summary \
+java -jar ~/.claude/skills/spoon-claude/scripts/spoon-claude.jar summary \
   --src <source-directory> \
   --class <ClassName | com.example.ClassName>
 ```
@@ -22,7 +22,7 @@ java -jar /PATH/TO/spoon-claude.jar summary \
 
 **Example:**
 ```bash
-java -jar ~/tools/spoon-claude.jar summary \
+java -jar ~/.claude/skills/spoon-claude/scripts/spoon-claude.jar summary \
   --src src/main/java \
   --class com.example.OrderService
 ```

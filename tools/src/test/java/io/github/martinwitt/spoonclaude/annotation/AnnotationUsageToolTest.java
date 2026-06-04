@@ -77,8 +77,7 @@ class AnnotationUsageToolTest {
         var result = new AnnotationUsageTool(tempDir.toString(), "Ann").execute();
 
         assertThat(result.usages()).hasSize(3);
-        assertThat(result.usages()).extracting("elementKind")
-                .containsExactlyInAnyOrder("class", "field", "method");
+        assertThat(result.usages()).extracting("elementKind").containsExactlyInAnyOrder("class", "field", "method");
     }
 
     @Test

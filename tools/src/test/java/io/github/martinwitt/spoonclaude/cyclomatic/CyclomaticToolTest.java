@@ -90,8 +90,7 @@ class CyclomaticToolTest {
         var result = new CyclomaticTool(tempDir.toString(), "Sample").execute();
 
         assertThat(result.methods()).hasSize(2);
-        assertThat(result.methods()).extracting("signature")
-                .containsExactlyInAnyOrder("go(String)", "go(int)");
+        assertThat(result.methods()).extracting("signature").containsExactlyInAnyOrder("go(String)", "go(int)");
     }
 
     private int complexity(CyclomaticResult result, String methodName) {

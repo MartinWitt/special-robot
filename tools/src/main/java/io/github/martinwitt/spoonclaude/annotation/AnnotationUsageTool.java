@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import spoon.reflect.declaration.CtAnnotation;
-import spoon.reflect.declaration.CtType;
 
 public final class AnnotationUsageTool implements SpoonTool<AnnotationUsageResult> {
 
@@ -39,8 +38,8 @@ public final class AnnotationUsageTool implements SpoonTool<AnnotationUsageResul
 
             type.getMethods().forEach(method -> {
                 if (hasAnnotation(method.getAnnotations())) {
-                    usages.add(new AnnotationUsage(
-                            typeFqn + "#" + SignatureBuilder.compact(method), "method", typeFqn));
+                    usages.add(
+                            new AnnotationUsage(typeFqn + "#" + SignatureBuilder.compact(method), "method", typeFqn));
                 }
                 method.getParameters().forEach(param -> {
                     if (hasAnnotation(param.getAnnotations())) {

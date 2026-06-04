@@ -14,7 +14,8 @@ public class AnnotationCommand implements Runnable {
     @Option(
             names = "--annotation",
             required = true,
-            description = "Annotation simple name (e.g. Transactional) or FQN (e.g. org.springframework.transaction.annotation.Transactional)")
+            description =
+                    "Annotation simple name (e.g. Transactional) or FQN (e.g. org.springframework.transaction.annotation.Transactional)")
     private String annotation;
 
     @Override

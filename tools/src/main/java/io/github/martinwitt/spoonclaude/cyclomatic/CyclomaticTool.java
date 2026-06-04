@@ -36,10 +36,8 @@ public final class CyclomaticTool implements SpoonTool<CyclomaticResult> {
         var type = TypeResolver.resolve(model, className);
 
         List<MethodComplexity> methods = type.getMethods().stream()
-                .map(m -> new MethodComplexity(
-                        m.getSimpleName(), SignatureBuilder.compact(m), computeComplexity(m)))
-                .sorted(Comparator.comparing(MethodComplexity::methodName)
-                        .thenComparing(MethodComplexity::signature))
+                .map(m -> new MethodComplexity(m.getSimpleName(), SignatureBuilder.compact(m), computeComplexity(m)))
+                .sorted(Comparator.comparing(MethodComplexity::methodName).thenComparing(MethodComplexity::signature))
                 .collect(Collectors.toList());
 
         return new CyclomaticResult(type.getQualifiedName(), methods);

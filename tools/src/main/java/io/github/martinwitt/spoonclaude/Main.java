@@ -6,6 +6,7 @@ import io.github.martinwitt.spoonclaude.commands.CallGraphCommand;
 import io.github.martinwitt.spoonclaude.commands.ContextCommand;
 import io.github.martinwitt.spoonclaude.commands.CyclomaticCommand;
 import io.github.martinwitt.spoonclaude.commands.DiffCommand;
+import io.github.martinwitt.spoonclaude.commands.HierarchyCommand;
 import io.github.martinwitt.spoonclaude.commands.ImpactCommand;
 import io.github.martinwitt.spoonclaude.commands.ImplCommand;
 import io.github.martinwitt.spoonclaude.commands.RoutesCommand;
@@ -26,6 +27,7 @@ import picocli.CommandLine.Command;
             ApiCommand.class,
             CyclomaticCommand.class,
             DiffCommand.class,
+            HierarchyCommand.class,
             ImpactCommand.class,
             ImplCommand.class,
             RoutesCommand.class,

@@ -8,8 +8,8 @@ import picocli.CommandLine.Option;
 @Command(name = "context", description = "Extract focused method context: signature, body, calls, annotations")
 public class ContextCommand implements Runnable {
 
-    @Option(names = "--file", required = true, description = "Path to source file or directory")
-    private String file;
+    @Option(names = "--src", required = true, description = "Path to source file or directory")
+    private String src;
 
     @Option(names = "--element", required = true, description = "ClassName#methodName (e.g. UserService#findById)")
     private String element;
@@ -18,7 +18,7 @@ public class ContextCommand implements Runnable {
     public void run() {
         try {
             var parts = splitElement(element);
-            System.out.println(JsonRenderer.render(new ContextExtractor(file, parts[0], parts[1]).execute()));
+            System.out.println(JsonRenderer.render(new ContextExtractor(src, parts[0], parts[1]).execute()));
         } catch (Exception e) {
             System.err.println(JsonRenderer.renderError(e.getMessage()));
             System.exit(1);

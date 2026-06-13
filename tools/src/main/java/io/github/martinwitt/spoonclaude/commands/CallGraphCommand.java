@@ -8,8 +8,8 @@ import picocli.CommandLine.Option;
 @Command(name = "callgraph", description = "Show callers and callees of a method up to --depth levels")
 public class CallGraphCommand implements Runnable {
 
-    @Option(names = "--file", required = true, description = "Path to source file or directory")
-    private String file;
+    @Option(names = "--src", required = true, description = "Path to source file or directory")
+    private String src;
 
     @Option(names = "--method", required = true, description = "ClassName#methodName (e.g. UserService#findById)")
     private String method;
@@ -21,7 +21,7 @@ public class CallGraphCommand implements Runnable {
     public void run() {
         try {
             var parts = splitElement(method);
-            System.out.println(JsonRenderer.render(new CallGraphTool(file, parts[0], parts[1], depth).execute()));
+            System.out.println(JsonRenderer.render(new CallGraphTool(src, parts[0], parts[1], depth).execute()));
         } catch (Exception e) {
             System.err.println(JsonRenderer.renderError(e.getMessage()));
             System.exit(1);
